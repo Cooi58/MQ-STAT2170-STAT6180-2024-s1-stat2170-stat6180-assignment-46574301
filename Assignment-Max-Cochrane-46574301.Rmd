@@ -105,8 +105,75 @@ F) Choose the best model among M1, M2, and M3 and validate it. Provide reasoning
 comment on the model fit.
 
 ```{r sales}
+par(mfrow = c(2, 2))
+plot(M2)
+```
 
+**Comments**
+
+
+**Question 2**
+
+
+```{r Campain}
+summary(campaign)
+```
+
+A) Construct two different preliminary graphs that investigate different features of the data
+and comment.
+```{r Campain}
+
+par(mfrow = c(1, 3))  
+
+hist(campaign$Score[campaign$Region == "Urban"], 
+     main = "Engagement Scores in Urban Regions", 
+     xlab = "Engagement Score", ylab = "Frequency", col = "skyblue")
+hist(campaign$Score[campaign$Region == "Rural"], 
+     main = "Engagement Scores in Rural Regions", 
+     xlab = "Engagement Score", ylab = "Frequency", col = "lightgreen")
+
+boxplot(Score ~ Type, data = campaign, 
+        xlab = "Campaign Type", ylab = "Engagement Score", 
+        main = "Engagement Scores by Campaign Type", col = "lightblue")
+```
+**Comments**
+
+B) Write down the full interaction model for this situation, defining all appropriate parameters.
+```{r Campain}
 
 ```
 
 **Comments**
+
+
+C) Analyse the data to study the effect of Type and Region on the percentage increase in
+engagement Score at 5% significance level. Remember to
+• state the null and alternative hypothesis for each test,
+• check assumptions (model diagnostics),
+• interpret the results.
+```{r Campain}
+
+```
+
+**Comments**
+
+
+D) Repeat the above test analysis for the main effects.
+```{r Campain}
+
+```
+
+
+**Comments**
+
+
+E) Using TukeyHSD produce multiple comparisons between each level for both Type and
+Region. Comment on the effectiveness of the marketing campaign type on customer engagement
+scores and also the impact of region on customer engagement scores. (Hint: Confirm the design is
+balanced before proceeding with the TukeyHSD test.)
+```{r Campain}
+
+```
+
+**Comments**
+
