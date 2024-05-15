@@ -1,0 +1,112 @@
+---
+title: "46574301 MQ-STAT2170-STAT6180-2024-s1-stat2170-stat6180-assignment"
+output: pdf_document
+date: "2024-05-15"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+
+A) Load the data from the file sales.csv and create a scatter plot of Sales against Index.
+Comment on the relationship between the two variables
+```{r sales}
+sales <- read.csv("sales.csv")
+```
+```{r sales}
+plot(sales$Index, sales$Sales, 
+     xlab = "Index", ylab = "Sales", 
+     main = "Scatter Plot of Sales against Index")
+```
+**Comments**
+
+B) Fit a simple linear regression model and named it as M1 to predict Sales using Index.
+Validate the model through diagnostic checks and comment.
+
+```{r sales}
+M1 <- lm(Sales ~ Index, data = sales)
+summary(M1)
+par(mfrow = c(2, 2))
+plot(M1)
+```
+**Comments**
+
+C) Fit two polynomial models of order 2 and order 3 to predict Sales using Index. Name the
+quadratic model as M2 and the cubic model as M3. There is no need to validate the polynomial models
+at this stage. Compare and comment.
+```{r sales}
+M2 <- lm(Sales ~ Index + I(Index^2), data = sales)
+summary(M2)
+M3 <- lm(Sales ~ Index + I(Index^2) + I(Index^3), data = sales)
+summary(M3)
+```
+**Comments**
+
+D) Plot the data and add the three predicted lines from models M1, M2, and M3 to your plot.
+Comment on the fit of the models.
+
+```{r sales}
+plot(sales$Index, sales$Sales, 
+     xlab = "Index", ylab = "Sales", 
+     main = "Sales vs Index with Fitted Models")
+
+abline(M1, col = "red", lwd = 2)
+
+abline(sales$Index, predict(M2), col = "blue", lwd = 2)
+
+abline(sales$Index, predict(M3), col = "green", lwd = 2)
+
+legend("topright", legend = c("Linear Model (M1)", "Quadratic Model (M2)", "Cubic Model (M3)"), 
+       col = c("red", "blue", "green"), lty = 1, lwd = 2)
+```
+
+**Comments**
+
+E) Assess the significance of the linear, quadratic and cubic terms in M3 using a Sequential
+Sum of Squares (Hint: A sequential ANOVA is necessary.) Comment on the results.
+
+```{r sales}
+M1 <- lm(Sales ~ Index, data = sales)
+M2 <- lm(Sales ~ poly(Index, 2), data = sales)
+M3 <- lm(Sales ~ poly(Index, 3), data = sales)
+
+anova_M1_M2 <- anova(M1, M2)  
+anova_M2_M3 <- anova(M2, M3)  
+
+print(anova_M1_M2)
+print(anova_M2_M3)
+```
+
+
+**Comments**
+
+F) Choose the best model among M1, M2, and M3 and validate it. Provide reasoning and
+comment on the model fit.
+
+```{r sales}
+
+
+```
+
+**Comments**
